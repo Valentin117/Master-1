@@ -132,7 +132,7 @@
     *Lien 2* : [Infrastructure 3.2](https://cloud.google.com/products/calculator/#id=4a06d4d9-924b-4249-b27c-a3557c227208)
 
     - Pour un serveur de base de donness manage
-        * Base de donness : db-custom-2-10240 (8 Go de RAM + 2 vCPU) <br>
+        * Base de donness : db-custom-2-10240 (10 Go de RAM + 2 vCPU) <br>
 *Sachant que j'ai pris un disque de stockage HDD (et non SSD) de 150 Go. Le prix pour 50 Go de stockage revient à 10€ de mois, soit 140€ environ*
             + **150€99/mois** pour 1 serveur de base de donnees
     > *TOTAL 3* : **150€99/mois** pour 1 serveur de base de donnees
