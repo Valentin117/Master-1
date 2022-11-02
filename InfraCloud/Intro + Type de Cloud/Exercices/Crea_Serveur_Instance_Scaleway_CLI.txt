@@ -1,0 +1,1 @@
+scw instance server create type=DEV1-S zone=nl-ams-1 image=ubuntu_jammy root-volume=l:20G name=scw-valentin-clement ip=new project-id=0c1671e0-2f42-4ed2-8799-14f144ecb947

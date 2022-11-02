@@ -1,0 +1,56 @@
+import pymysql
+  
+# Create a connection object
+  
+signin = pymysql.connect('51.159.112.48:19689', 'Administrateur', 'CestLeP@ssw0rd!', 'rdb')
+  
+# Create a cursor object
+curs = signin.cursor()
+  
+  
+query = f"SELECT * FROM user"
+  
+curs.execute(query)
+  
+rows = curs.fetchall()
+signin.close()
+  
+for row in rows :
+    print(row)
+      
+
+---------------------------
+def handle(event, context):
+    # Create a cursor to perform database operations
+    mydb = mysql.connector.connect(
+        host="51.159.112.48:19689",
+        user="Administrateur",
+        password="CestLeP@ssw0rd!",
+        database="rdb",
+        port=15571
+    )
+    print("Connected to Database")
+    cursor = mydb.cursor()
+    # Execute a query
+    cursor.execute("SELECT * FROM user")
+    # Get result
+    record = cursor.fetchall()
+    print("Succesfully fetch data")
+    #Closing cursor, howver we keep the connection alive to enable faster loading for the next function calls
+    cursor.close()
+    return {
+        "statusCode": 200,
+        "body": {
+        "message": record
+        }
+    }
+
+------------------------------
+def handle(event, context):
+    return {
+        "body": {
+            "message": 'Hello, world',
+        },
+        "statusCode": 200,
+    }
+      
