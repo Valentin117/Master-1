@@ -1,0 +1,12 @@
+version: "3.9"
+services:
+  mysql:
+    image: "mysql:5.7"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+  adminphp:
+    image: "phpmyadmin"
+    links:
+      - mysql:db
+    ports:
+      - "80:80"
