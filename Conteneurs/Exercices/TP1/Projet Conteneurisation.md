@@ -116,7 +116,7 @@ docker run --name mysql -e MYSQL_ROOT_PASSWORD=root -d mysql:5.7
 ```
 
 ```
-docker run --name adminphp -p 80:80 --link mysql:db -d phpmyadmin/phpmyadmin
+dock
 ```
 
 ![Containers](https://i.imgur.com/h9RrQbK.png)
@@ -133,15 +133,113 @@ Connexion à PhpMyAdmin :
 
 ## 8. Faire la même chose que précédemment en utilisant un fichier docker-compose.yml
 
+```
+touch docker-compose.yml
+```
+
+```
+version: "3.9"
+services:
+  mysql:
+    image: "mysql:5.7"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+  adminphp:
+    image: "phpmyadmin"
+    links:
+      - mysql:db
+    ports:
+      - "80:80"
+```
+
+```
+docker compose up
+```
+
+![Docker Compose](https://i.imgur.com/UPL7iBH.png)
+<br>
+![PhpMyAdmin](https://i.imgur.com/zhR7oSi.png)
+
+```
+docker compose up -d
+```
+
+Le -d est une option qui permet d'exécuter la commande en arrière plan et qui nous permet d'avoir toujours la main pour effectuer de nouvelles tâches.
+
+![Arrêt Docker compose et lancent en arrière plan](https://i.imgur.com/k4MMDdJ.png)
+
 a. Qu’apporte le fichier docker-compose par rapport aux commandes docker run ? Pourquoi est-il intéressant ? (cf. ce qui a été présenté pendant le cours)
 
-```
-
-```
+Le fichier Docker-compose permet de lancer en une seule commande 2 containers en simultané au lieu de lancer chaque container un par un afin qu'il exécute nos images.
 
 b. Quel moyen permet de configurer (premier utilisateur, première base de
 données, mot de passe root, …) facilement le conteneur mysql au lancement ?
 
 ```
+version: "3.9"
+services:
+  mysql:
+    image: "mysql:5.7"
+    environment:
+      - MYSQL_USER=valentin
+      - MYSQL_PASSWORD=malo
+      - MYSQL_DATABASE=mysql
+      - MYSQL_ROOT_PASSWORD=root
+```
+
+-------------------
+
+## 9. Observation de l’isolation réseau entre 3 conteneurs
+
+a. A l’aide de docker-compose et de l’image praqma/network-multitool disponible sur le Docker Hub créer 3 services (web, app et db) et 2 réseaux (frontend et backend).
+Les services web et db ne devront pas pouvoir effectuer de ping de l’un vers l’autre
 
 ```
+docker pull praqma/network-multitool
+```
+
+![Docker Images](https://i.imgur.com/WCaSUxz.png)
+
+```
+version: "3.9"
+services:
+  web:
+    image: "praqma/network-multitool"
+    networks:
+      - frontend
+  app:
+    image: "praqma/network-multitool"
+    networks:
+      - frontend
+      - backend
+  db:
+    image: "praqma/network-multitool"
+    networks:
+      - backend
+
+networks:
+  frontend:
+  backend:
+```
+
+```
+docker compose up
+```
+
+![Docker Inspect](https://i.imgur.com/nNBesyX.png)
+
+Il est impossible que les 2 services puissent se ping, il ne se trouve pas dans le même réseau. Seulement le servie app peut communiquer avec les 2 autres services car il se trouve dans les 2 réseaux.
+
+b. Quelles lignes du résultat de la commande docker inspect justifient ce comportement ?
+
+```
+docker network inspect tp1_web-1 | grep "Network"
+docker network inspect tp1_db-1 | grep "Network"
+docker network inspect tp1_app-1 | grep "Network"
+```
+
+Cf. la capture ci-dessus.
+
+c. Dans quelle situation réelles (avec quelles images) pourrait-on avoir cette configuration réseau ? Dans quel but ?
+
+
