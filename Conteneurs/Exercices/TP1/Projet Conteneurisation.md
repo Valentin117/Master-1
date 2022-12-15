@@ -116,7 +116,7 @@ docker run --name mysql -e MYSQL_ROOT_PASSWORD=root -d mysql:5.7
 ```
 
 ```
-dock
+docker run --name adminphp -p 80:80 --link mysql:db -d phpmyadmin/phpmyadmin
 ```
 
 ![Containers](https://i.imgur.com/h9RrQbK.png)
@@ -242,4 +242,4 @@ Cf. la capture ci-dessus.
 
 c. Dans quelle situation réelles (avec quelles images) pourrait-on avoir cette configuration réseau ? Dans quel but ?
 
-
+On pourrait l'utiliser dans le cas d'un multi-cloud, si on utilise plusieurs Cloud Provider, si l'on utilise leur service pour héberger nos différents services.
