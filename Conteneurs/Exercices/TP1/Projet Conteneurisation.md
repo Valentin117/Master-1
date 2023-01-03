@@ -98,6 +98,8 @@ c. Quelles différences observez-vous entre les procédures 5. et 6. ? Avantages
 La différence entre les 2, est que dans la 2nd méthode où l'on construit une image, c'est que l'on peut modifier comme on veut notre Dockerfile et créer tant que l'on veut d'images à partir de ce Dockerfile, on peut donc en faire plusieurs version et les adapter comme on le veut suivant la situation ou le problème que l'on rencontre.
 Et on a juste à lancer un container avec la version de l'image que l'on souhaite et on obtient notre container sans passer par des phases de récupération d'image sur Docker Hub.
 
+Un Dockerfile est simplement un fichier de configuration utilisé dans le cas de création d'image Docker, tandis que l'autre méthode (partie 5) utilise des commandes pour copier des fichiers entre un conteneur et un hôte/autre conteneur.
+
 -------------------
 
 ## 7. Utiliser une base de données dans un conteneur docker
@@ -170,10 +172,13 @@ Le -d est une option qui permet d'exécuter la commande en arrière plan et qui 
 
 a. Qu’apporte le fichier docker-compose par rapport aux commandes docker run ? Pourquoi est-il intéressant ? (cf. ce qui a été présenté pendant le cours)
 
-Le fichier Docker-compose permet de lancer en une seule commande 2 containers en simultané au lieu de lancer chaque container un par un afin qu'il exécute nos images.
+Le fichier Docker-compose permet de lancer en une seule commande 2 containers en simultané au lieu de lancer chaque container un par un afin qu'il exécute nos images. En utilisant une configuration unique. Cela permet aussi de faciliter la gestion des conteneurs et leur exécution en production car on définit toute la configuration dans un seul fichier et on utilise une seule commande pour exécuter tous les conteneurs.
 
-b. Quel moyen permet de configurer (premier utilisateur, première base de
-données, mot de passe root, …) facilement le conteneur mysql au lancement ?
+On peut l'utiliser dans le cas d'application complexe nécessitant plusieurs conteneurs, au lieu d'utiliser plusieurs fois la commande docker run pour chaque conteneur qu'on a besoin.
+
+b. Quel moyen permet de configurer (premier utilisateur, première base de données, mot de passe root, …) facilement le conteneur mysql au lancement ?
+
+Pour configurer facilement un conteneur mysql au lancement, on peut utiliser les variables d'environnement directement dans notre Docker-compose, en utilisant l'option ```environment```.
 
 ```
 version: "3.9"
@@ -192,7 +197,7 @@ services:
 ## 9. Observation de l’isolation réseau entre 3 conteneurs
 
 a. A l’aide de docker-compose et de l’image praqma/network-multitool disponible sur le Docker Hub créer 3 services (web, app et db) et 2 réseaux (frontend et backend).
-Les services web et db ne devront pas pouvoir effectuer de ping de l’un vers l’autre
+Les services web et db ne devront pas pouvoir effectuer de ping de l’un vers l’autre.
 
 ```
 docker pull praqma/network-multitool
@@ -240,6 +245,11 @@ docker network inspect tp1_app-1 | grep "Network"
 
 Cf. la capture ci-dessus.
 
+Pour vérifier les différents services (web et db) ne peuvent pas se ping, on utilise la commande ```docker netword inspect``` pour afficher les informations sur les réseaux et services connectés à chacun d'eux.
+
+On peut voir sur la capture ci-dessus, que les 2 services ne se ping pas car les 2 services sont connectés à des réseaux différents (```frontend``` et ```backend```) et ont des IP différentes.
+
 c. Dans quelle situation réelles (avec quelles images) pourrait-on avoir cette configuration réseau ? Dans quel but ?
 
 On pourrait l'utiliser dans le cas d'un multi-cloud, si on utilise plusieurs Cloud Provider, si l'on utilise leur service pour héberger nos différents services.
+On peut aussi l'utiliser dans un environnement d'application où l'application serait divisé en plusieurs services qui communiquent entre eux via les réseaux.
