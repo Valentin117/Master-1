@@ -1,0 +1,31 @@
+version: '3.9'
+services:
+  apache:
+    image: "httpd:2.4"
+    ports:
+      - "80:80"
+    volumes:
+      - ./www:/usr/local/apache2/htdocs
+    links:
+      - php
+  php:
+    image: "php:7.2-fpm"
+    volumes:
+      - ./www:/var/www/html
+  mysql:
+    image: "mysql:5.7"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: mysql
+      MYSQL_USER: valentin
+      MYSQL_PASSWORD: malo
+    volumes:
+      - ./db:/var/lib/mysql
+  phpmyadmin:
+    image: "phpmyadmin"
+    environment:
+      PMA_HOST: mysql
+      PMA_USER: valentin
+      PMA_PASSWORD: malo
+    ports:
+      - "8080:80"
