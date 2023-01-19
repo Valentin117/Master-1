@@ -1,0 +1,95 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: pizza-services
+spec:
+  selector:
+    app: pizza
+  ports:
+  - name: http
+    port: 80
+    targetPort: 80
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pizza-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pizza
+  template:
+    metadata:
+      labels:
+        app: pizza
+    spec:
+      containers:
+      - name: pizza
+        image: valentin117/eatsout:pizza
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tacos-services
+spec:
+  selector:
+    app: tacos
+  ports:
+  - name: http
+    port: 80
+    targetPort: 80
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tacos-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tacos
+  template:
+    metadata:
+      labels:
+        app: tacos
+    spec:
+      containers:
+      - name: tacos
+        image: valentin117/eatsout:tacos
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: burgers-services
+spec:
+  selector:
+    app: burgers
+  ports:
+  - name: http
+    port: 80
+    targetPort: 80
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: burgers-deployment
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: burgers
+  template:
+    metadata:
+      labels:
+        app: burgers
+    spec:
+      containers:
+      - name: burgers
+        image: valentin117/eatsout:burgers
+        ports:
+        - containerPort: 80
