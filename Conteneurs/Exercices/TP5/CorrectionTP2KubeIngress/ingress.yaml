@@ -1,0 +1,36 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: nginx-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: / # Important, permet de ne pas faire de requêtes qui contiennent encore /burgers dans le path
+spec:
+  rules:
+  - host: mypizza.eatsout.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: pizza-svc # Doit correspondre avec la ligne 5 (nom du service) du fichier pizza.yaml
+            port:
+              number: 80
+  - host: burgerandtacos.eatsout.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: /burgers
+        backend:
+          service:
+            name: burger-svc # Doit correspondre avec la ligne 5 (nom du service) du fichier burger.yaml
+            port:
+              number: 80
+      - pathType: Prefix
+        path: /tacos
+        backend:
+          service:
+            name: taco-svc # Doit correspondre avec la ligne 5 (nom du service) du fichier taco.yaml
+            port:
+              number: 80

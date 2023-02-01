@@ -1,0 +1,11 @@
+image:
+  repository: nginx
+  tag: "1.22"
+
+ingress:
+  enabled: true
+  hosts:
+    - host: srv-prod.test
+      paths:
+        - path: /
+          pathType: ImplementationSpecific

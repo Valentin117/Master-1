@@ -1,0 +1,15 @@
+image:
+  repository: nginx
+  tag: "1.23"
+
+ingress:
+  enabled: true
+  hosts:
+    - host: srv-dev.test
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+
+# service:
+#   type: ClusterIP
+#   port: 80
