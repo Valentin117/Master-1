@@ -1,0 +1,66 @@
+rm -rf exo_noob/
+
+cat ???
+
+touch one two three four five
+echo "1" > one
+echo "2" > two
+etc...
+
+ls one two three four five > fusion.txt
+cat fusion.txt
+ls | wc -L
+ls | wc -l
+
+grep -E ^cor fichier1
+grep -E ^cor.* fichier1
+cat fichier1 | grep -oE "^(cor).*"
+
+grep -E "^ba.*e$" word2
+
+grep -oE "^.{5}$" word3
+
+grep -oE "^[aeiouy]+$" word4
+
+grep -oE "^([^aeiouy][aeiouy])+[^aeiouy]?$" word5
+
+Exo Regex :
+
+wget http://www.3zsoftware.com/listes/liste_francais.zip
+Ou curl http://www.3zsoftware.com/listes/liste_francais.zip > dico.zip
+grep -oE "^(z).*(eéèêë)$" dico.txt
+grep -oE "^(z).*(eéèêë)$" dico.txt >> z-e.txt
+cat z-e.txt | wc -l
+history | grep "grep"
+
+curl https://www.atlas-monde.net/tous-les-pays/ > index.html
+grep -E ">Fr.*<" index.html
+grep -E "17\">Fr.*<" index.html
+grep -Eo "17\">Fr.*<" index.html
+
+
+nano script.sh
+
+#!/bin/bash
+mkdir ./dossier1
+cd ./dossier1
+touch fichier1
+touch fichier2 fichier3
+
+nano script2.sh
+
+#!/bin/bash
+mkdir test_bash
+touch test_bash/1.text
+touch test_bash/2.text test_bash/3.txt
+mkdir test_bash_2
+cp -r test_bash test_bash_2/test_bash
+
+alias cree_deux_dossiers="bash script2.sh"
+cree_deux_dossiers
+unalias cree_deux_dossiers
+
+#!/bin/bash
+cat $1/* | wc -w
+
+

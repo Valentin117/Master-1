@@ -1,0 +1,57 @@
+Interagir avec une API avec un langage de script
+
+1) Créer le script bash qui prend trois paramètres en argument : le nom du meme, le
+texte du haut et le texte du bas, qui permet de générer une image grâce à cette API :
+http://apimeme.com/?ref=apilist.fun
+
+```
+#!/bin/bash
+
+nom_meme="$1"
+texte_haut="$2"
+texte_bas="$3"
+
+api_url="http://apimeme.com/meme?meme=$nom_meme&top=$texte_haut&bottom=$texte_bas"
+curl "$api_url" > image.png
+```
+
+On donne les droits d'exécution du script : chmod +x requete_bash.sh
+Puis on lance le script : ./requete_bash.sh "10-Guy" "bla1" "bla2"
+
+2) Créer un script qui permet de récupérer tous les noms de meme de la page html
+http://apimeme.com/?ref=apilist.fun et les écrire dans un fichier name_memes.txt
+(utiliser l’inspecteur d’éléments, ils sont cachés dans les balises <option></option>)
+
+```
+#!/bin/bash
+
+curl -s "http://apimeme.com/?ref=apilist.fun" > page.html
+grep -o '"[^"]*">' page.html | sed 's/"//;s/">//' > name_memes.txt
+```
+
+On donne les droits d'exécution du script : chmod +x scrape_meme.sh
+Puis on lance le script : ./scrape_meme.sh
+
+3) Dans le fichier requete_bash.sh
+Grâce aux commandes head -n, tail et la génération d’un nombre aléatoire, adapter le
+script pour récupérer un nom de meme tiré au hasard du fichier name_memes.txt et
+l’injecter dans la requête
+
+```
+#!/bin/bash
+
+nom_meme="$1"
+texte_haut="$2"
+texte_bas="$3"
+
+nom_meme=$(shuf -n 1 name_memes.txt)
+
+api_url="http://apimeme.com/meme?meme=$nom_meme&top=$texte_haut&bottom=$texte_bas"
+
+curl "$api_url" > image.png
+```
+
+Puis on lance le script : ./requete_bash.sh "bla1" "bla2"
+
+
+

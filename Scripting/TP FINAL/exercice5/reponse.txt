@@ -1,0 +1,133 @@
+ Automatisation & configuration d’un serveur web
+
+1) Créer un script bash configure_and_run_server.sh qui permet d’installer toutes les
+dépendances nécessaires permettant de lancer un serveur web avec python flask.
+Voici l’architecture que le script doit créer et le contenu du fichier app_flask.py
+
+```
+#!/bin/bash
+
+sudo apt-get update
+sudo apt-get install tree
+sudo apt-get install python3 python3-pip
+sudo pip install requests
+sudo pip install flask
+mkdir web
+touch web/app_flask.py
+touch web/blocked_ip.txt
+
+cat <<EOF > web/app_flask.py
+from flask import Flask
+
+app = Flask(__name__)
+
+@app.route("/")
+def check_ip():
+    return f"Connecté avec l'adresse {request.remote_addr}"
+
+app.run()
+EOF
+```
+
+On fait la commande chmod +x configure_and_run_server.sh
+Puis ./configure_and_run_server.sh
+
+2) Adapter le script app_flask.py pour vérifier que l’adresse du client qui se connecte est
+présent dans la liste d’ip définies dans blocked_ip.txt, si c’est le cas retourner le
+message “Accès refusé”, sinon retourner le message normal “connecté avec
+l’adresse …”.
+
+```
+#!/bin/bash
+
+sudo apt-get update
+sudo apt-get install tree
+sudo apt-get install python3 python3-pip
+sudo pip install requests
+sudo pip install flask
+mkdir web
+touch web/app_flask.py
+touch web/blocked_ip.txt
+
+cat <<EOF > web/blocked_ip.txt
+{
+"127.0.0.1":"Hello there localhost",
+"191.74.9.76":"Hey James !",
+"191.74.10.66":"Hey Sarah !"
+}
+EOF
+
+cat <<EOF > web/app_flask.py
+from flask import Flask, request
+
+app = Flask(__name__)
+
+with open('/home/valentin/Documents/web/blocked_ip.txt') as f:
+    blocked_ip = f.readlines()
+@app.route("/")
+def check_ip():
+    blocked = request.remote_addr
+    if blocked in blocked_ip:
+        return "Accès refusé"
+    else:
+        return f"Connecté avec l'adresse {blocked}"
+app.run()
+EOF
+
+chmod +x web/app_flask.py
+python3 web/app_flask.py
+```
+
+Puis ./configure_and_run_server.sh
+
+3) Créer un fichier blocked_ip.json, comme l’exemple suivant
+Dans le fichier app.py, charger le fichier json grâce à la librairie json (chercher sur
+internet comment charger un fichier json avec cette librairie).
+Un fichier json se transforme en dictionnaire en python.
+Ensuite, si l’adresse client est présente dans le dictionnaire (par exemple 127.0.0.1),
+retourner le message personnalisé associé (par exemple Hello there localhost)
+
+```
+#!/bin/bash
+
+sudo apt-get update
+sudo apt-get install tree
+sudo apt-get install python3 python3-pip
+sudo pip install requests
+sudo pip install flask
+mkdir web
+touch web/app_flask.py
+touch web/blocked_ip.json
+
+cat <<EOF > web/blocked.json
+{
+"127.0.0.1":"Hello there localhost",
+"191.74.9.76":"Hey James !",
+"191.74.10.66":"Hey Sarah !"
+}
+EOF
+
+cat <<EOF > web/app_flask.py
+from flask import Flask, request
+import json
+
+app = Flask(__name__)
+
+with open('/home/valentin/Documents/web/blocked_ip.json') as json_file:
+    blocked_ip = json.load(json_file)
+@app.route("/")
+def check_ip():
+    blocked = request.remote_addr
+    if blocked in blocked_ip:
+        return "Accès refusé"
+    else:
+        return f"Connecté avec l'adresse {blocked}"
+app.run()
+EOF
+
+chmod +x web/app_flask.py
+python3 web/app_flask.py
+```
+
+
+

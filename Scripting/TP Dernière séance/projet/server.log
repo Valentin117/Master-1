@@ -1,0 +1,30 @@
+2023-04-27 12:02:33,073 - DEBUG - Starting new HTTP connection (1): localhost:80
+2023-04-27 12:02:33,076 - DEBUG - http://localhost:80 "GET / HTTP/1.1" 200 19
+2023-04-27 12:02:33,078 - INFO - All is running good !
+2023-04-27 12:02:43,090 - DEBUG - Starting new HTTP connection (1): localhost:80
+2023-04-27 12:02:43,095 - DEBUG - http://localhost:80 "GET / HTTP/1.1" 200 19
+2023-04-27 12:02:43,097 - INFO - All is running good !
+2023-04-27 13:06:02,254 - DEBUG - Starting new HTTP connection (1): localhost:80
+2023-04-27 13:06:02,258 - DEBUG - http://localhost:80 "GET / HTTP/1.1" 200 19
+2023-04-27 13:06:02,260 - INFO - All is running good !
+2023-04-27 13:06:12,271 - DEBUG - Starting new HTTP connection (1): localhost:80
+2023-04-27 13:06:12,274 - DEBUG - http://localhost:80 "GET / HTTP/1.1" 200 19
+2023-04-27 13:06:12,279 - INFO - All is running good !
+2023-04-27 13:06:22,291 - DEBUG - Starting new HTTP connection (1): localhost:80
+2023-04-27 13:06:22,295 - DEBUG - http://localhost:80 "GET / HTTP/1.1" 200 19
+2023-04-27 13:06:22,296 - INFO - All is running good !
+2023-04-27 13:06:32,197 - DEBUG - Starting new HTTP connection (1): localhost:80
+2023-04-27 13:06:32,200 - DEBUG - http://localhost:80 "GET / HTTP/1.1" 200 19
+2023-04-27 13:06:32,201 - INFO - All is running good !
+2023-04-27 13:06:42,213 - DEBUG - Starting new HTTP connection (1): localhost:80
+2023-04-27 13:06:42,216 - DEBUG - http://localhost:80 "GET / HTTP/1.1" 200 19
+2023-04-27 13:06:42,217 - INFO - All is running good !
+2023-04-27 13:06:52,229 - DEBUG - Starting new HTTP connection (1): localhost:80
+2023-04-27 13:06:52,232 - DEBUG - http://localhost:80 "GET / HTTP/1.1" 200 19
+2023-04-27 13:06:52,233 - INFO - All is running good !
+2023-04-27 13:07:02,245 - DEBUG - Starting new HTTP connection (1): localhost:80
+2023-04-27 13:07:02,249 - DEBUG - http://localhost:80 "GET / HTTP/1.1" 200 19
+2023-04-27 13:07:02,250 - INFO - All is running good !
+2023-04-27 13:07:12,263 - DEBUG - Starting new HTTP connection (1): localhost:80
+2023-04-27 13:07:12,267 - DEBUG - http://localhost:80 "GET / HTTP/1.1" 200 19
+2023-04-27 13:07:12,269 - INFO - All is running good !

@@ -1,0 +1,24 @@
+Les avantages de Bash :
+
+- Shell puissant et efficace pour des tâches simples tel que la manipulation de fichiers et dossiers, et configuration OS, etc...
+- Sert d'interface en ligne de commande (CLI) pour Linux et Unix, donc utilise pour l'automatisation de tâches
+- Facile à prendre en main et à apprendre
+
+Les inconvéniants de Bash :
+
+- Compliqué à utiliser pour des tâches complexes car limité en termes de structures de données et de fonctions de programmation
+- Moins portable que le Python car il est spécique qu'à certains OS
+
+Les avantages de Python :
+
+- Language de programmation complet, fournit plus de termes de structures de données, de bibliothéques et des frameworks, pour la réalisation de tâches complexes
+- Python est plus portable que Bash, il peut être exécuter sur plusieurs OS différents
+- Facile d'utilisation et à comprendre pour les tâches simples
+
+Les inconvéniants de Python :
+- Python est plus complexe à apprendre que Bash pour des tâches mêmes simplistes et surtout les plus complexes
+- Plus lent à exécuter que Bash
+
+Ils sont complémentaires car ils sont utilisés pour la réalisation de tâches différentes et peuvent être utilisé en même temps.
+Bash sera utilsié pour des tâches plus simples et appeler des commandes systèmes et Python sera lui pour les tâches complexes, comme la manipulation de données et la création d'interfaces graphiques.
+Ils sont utilisés pour la création de scripts complets et efficace.

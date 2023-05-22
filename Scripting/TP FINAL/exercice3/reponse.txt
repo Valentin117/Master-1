@@ -1,0 +1,60 @@
+Expressions régulières
+
+1) Quelle commande bash permet de télécharger ce fichier zip dans un fichier
+appelé “exo.zip” (utiliser >)
+
+Installation de curl : apt install curl
+Téléchargement : curl http://www.3zsoftware.com/listes/liste_francais.zip > exo.zip
+
+2) Chercher une commande linux qui permet de dézipper le fichier (détailler le
+processus d’installation)
+
+Installation du programme de dézippage : sudo apt-get install unzip
+Extraction des fichiers du zip : unzip exo.zip
+
+Un fichier liste_francais.txt a été extrait, écrire des expressions régulières et utiliser
+grep -Eo pour récupérer les résultats des expressions sur le fichier.
+3) A quoi sert le tag “-Eo” de la commande grep?
+
+Le tag "-Eo" d'une commande grep se divise en 2 parties : 
+- permet d'utiliser des expressions régulières étendues ("-E")
+- à ne retourner que les parties correspondantes ("-o") des résultats
+
+4) Quelle commande utiliser pour obtenir le nombre de lignes des résultats
+obtenus par la commande grep (utiliser un pipe)?
+
+La pipe est "|"
+
+La commande : grep -Eo "expression_reguliere" liste_francais.txt | wc -l
+
+
+Ecrire les commandes grep et le nombre de lignes obtenues pour chacunes des
+expressions suivantes :
+5) celle qui extrait les mots qui commencent par b et qui finissent par e
+
+La commande : grep -Eo '\b\S*e' liste_francais.txt | wc -l
+
+Résultat : 289 lignes
+
+6) celle qui extrait les mots qui commencent par ba, puis une consonne, puis une
+voyelle et qui terminent par e
+
+La commande : grep -Eo '\ba[cdfghj-np-tv-z][aeiouy][^aeiouy]*e' liste_francais.txt | wc -l
+
+Résultat : 13 lignes
+
+7) celle qui extrait les mots qui commencent par p et qui possèdent un total de 6
+lettres
+
+La commande : grep -Eo '\bp.....\b' liste_francais.txt | wc -l
+
+Résultat : 290 lignes
+
+8) celle qui extrait les mots qui alternent successivement des consonnes et des
+voyelles
+
+La commande : grep -Eo '\b[bcdfghjklmnpqrstvwxz]*[aeiouy][bcdfghjklmnpqrstvwxz]*[aeiouy][bcdfghjklmnpqrstvwxz]*\b' liste_francais.txt | wc -l
+
+
+Résultat : 2996 lignes
+

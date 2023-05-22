@@ -1,0 +1,28 @@
+Planification de tâches
+
+1) La mise en place d'une sauvegarde automatique, necéssite l'utilisation du programme "rsync" qui est une commande de l'OS Linux pour la synchronisation des fichiers.
+
+Pour mettre en place cette automatisation :
+
+- Créer le dossier de stockage (celui qui va stocker toutes les données importantes du dossier Documents) sur le nouveau disque de destination
+- Créer un script bash qui va contenir toutes les commandes necéssaires tel que la commande "rsync" pour copier les fichiers du dossier Documents vers le dossier de sauvegarde
+- Mettre des droits d'exécution à notre script bash en utilisant la commande "chmod"
+- Configurer l'OS actuel afin de pouvoir exécuter le script selon le planning souhaité avec "crontab"
+
+2) Pour planifier le lancemet du script, on va utiliser comme indiqué précédement le programme "cron" qui est l'outil de planification de tâches de Linux :
+
+- Il faut tout d'abord ouvrir "cron" avec la commande "crontab -e"
+- Et on ajouter au script les lignes de commandes qui représente des temps où le script sera exécuter :
+.Les 4eme, 7eme et 23eme jours du mois à 16 heures : 0 16 4,7,23 * * /cheminduscript/script.sh
+.Une fois tous les deux jours à 9 heures : 0 9 */2 * * /cheminduscript/script.sh
+.Tous les lundis à 13 heures : 0 13 * * 1 /cheminduscript/script.sh
+.Au démarrage de la machine : @reboot /cheminduscript/script.sh
+
+4,7,23 16 * * *
+La 1ère colonne représente les minutes, la 2nd les heures, la 3ème les jours du mois, la 4ème les mois et la 5ème les jours de la semaine.
+Les * signifie "chaque" et / signife "tous les"
+Les @reboot c'est pour indique au démarrage du PC il s'exécute
+
+- Enregistrer le script. Et normalement il sera exécuter aux horaires spécifiques infiqués dans la tâche "cron"
+
+En cas de changement d'emplacement du script, il faudra modifier les chemins vers l'exécution du script.

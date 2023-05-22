@@ -1,0 +1,19 @@
+import smtplib
+# Set up la connexion avec SMTP
+smtp_server = 'smtp.gmail.com'
+smtp_port = 587
+smtp_username = 'truc@gmail.com'
+smtp_password = 'ici_mettre_mot_de_passe_application_google'
+smtp_connection = smtplib.SMTP(smtp_server, smtp_port)
+smtp_connection.starttls()
+smtp_connection.login(smtp_username, smtp_password)
+
+# Header du message
+from_email = 'truc@gmail.com'
+to_email = 'destinataire@gmail.com'
+subject ='Anniversaire!'
+body = 'Joyeux anniversaire, tu es mon meilleur pote !!'
+message = f'{subject} {body}'
+
+# Envoyer le message
+smtp_connection.sendmail(from_email, to_email, message)

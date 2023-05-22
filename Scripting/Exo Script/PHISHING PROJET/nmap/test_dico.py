@@ -1,0 +1,4 @@
+test = {'hostnames': [{'name': 'ec2-35-173-69-207.compute-1.amazonaws.com', 'type': 'PTR'}], 'addresses': {'ipv4': '35.173.69.207'}, 'vendor': {}, 'status': {'state': 'up', 'reason': 'echo-reply'}, 'tcp': {22: {'state': 'open', 'reason': 'syn-ack', 'name': 'ssh', 'product': 'OpenSSH', 'version': '8.2p1 Ubuntu 4ubuntu0.5', 'extrainfo': 'Ubuntu Linux; protocol 2.0', 'conf': '10', 'cpe': 'cpe:/o:linux:linux_kernel'}, 80: {'state': 'open', 'reason': 'syn-ack', 'name': 'http', 'product': 'PythonAnywhere', 'version': '', 'extrainfo': '', 'conf': '10', 'cpe': ''}}}
+tcp = test["tcp"]
+for port in tcp:
+    print(f"Port récupéré : {port}")
